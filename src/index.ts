@@ -115,3 +115,33 @@ function listarPendentes(): void {
     console.log(`- "${titulos[i]}" - ${autores[i]} - (${anos[i]})`);
   });
 }
+
+function exibirEstatisticas(): void {
+  console.log("=== ESTATISTICAS ===");
+
+  const total = titulos.length;
+  console.log(`Total de livros: ${total}`);
+
+  const qtdLidos = lido.reduce((acc, foiLido) => {
+    return foiLido ? acc + 1 : acc;
+  }, 0);
+  const percentual = (qtdLidos / total) * 100;
+  console.log(`Livros lidos: ${qtdLidos} (${percentual.toFixed(2)}%)`);
+
+  const indicesLidos: number[] = lido
+    .map((_, i) => i)
+    .filter((i) => lido[i] === true);
+
+  const notasLidas: number[] = indicesLidos.map((i) => avaliacoes[i]);
+  const somaNotas = notasLidas.reduce((acc, nota) => acc + nota, 0);
+  const media = somaNotas / qtdLidos;
+  console.log(`Media das avaliacoes: ${media.toFixed(2)}`);
+
+  const indiceMelhor = avaliacoes.reduce((accIndice, notaAtual, iAtual) => {
+    return notaAtual > avaliacoes[accIndice] ? iAtual : accIndice;
+  }, 0);
+  console.log(`Livro melhor avaliado: ${titulos[indiceMelhor]}`);
+
+  const totalPaginasLidas = indicesLidos.reduce((acc, i) => acc + paginas[i], 0);
+  console.log(`Total de paginas lidas: ${totalPaginasLidas}`);
+}
