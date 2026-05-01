@@ -51,7 +51,34 @@ function removerLivro(numeroLivro: number): void{
     avaliacoes.splice(indice, 1);
 }
 
-adicionarLivro("Senhor dos Aneis", "Tolkien", 1954, 1200);
-adicionarLivro("Gatos Guerreios", "Erin", 2010, 317);
-removerLivro(0);
-exibirBiblioteca();
+function buscarPorTitulo(termo: string): void {
+  const indices: number[] = titulos
+    .map((titulo, i) => i)
+    .filter((i) => titulos[i].toLowerCase().includes(termo.toLowerCase()));
+
+  if (indices.length === 0) {
+    console.log(`Nenhum livro encontrado com o termo: "${termo}"`);
+    return;
+  }
+
+  console.log(`=== RESULTADO DA BUSCA POR "${termo}" ===`);
+  indices.forEach((i) => {
+    console.log(`- "${titulos[i]}" (${anos[i]}) - ${autores[i]}`);
+  });
+}
+
+function listarPorAutor(nomeAutor: string): void{
+    const indices: number[] = autores
+    .map((autor, i) => i)
+    .filter((i) => autores[i] === nomeAutor);
+
+    if(indices.length === 0){
+        console.log(`Nenhum livro encontrado para o autor: ${nomeAutor}`);
+        return;
+    }
+
+    console.log(`=== LIVROS DE ${nomeAutor.toUpperCase()} ===`);
+    indices.forEach((i) =>{
+        console.log(`- "${titulos[i]}" (${anos[i]}) - ${paginas[i]} pag`);
+    });
+}
