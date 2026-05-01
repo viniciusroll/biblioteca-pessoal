@@ -10,12 +10,9 @@ Aplicação de console que permite cadastrar livros, marcar como lidos, buscar p
 
 ## Como executar
 
-\`\`\`bash
-
 npm install
 
 npm run dev
-\`\`\`
 
 ## Funcionalidades
 - Cadastro e remoção de livros
