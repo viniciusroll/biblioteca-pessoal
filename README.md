@@ -12,6 +12,8 @@ Aplicação de console que permite cadastrar livros, marcar como lidos, buscar p
 
 npm install
 
+npm run build
+
 npm run dev
 
 ## Funcionalidades
