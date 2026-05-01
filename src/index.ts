@@ -116,6 +116,22 @@ function listarPendentes(): void {
   });
 }
 
+function listarLidos(): void {
+  const indices: number[] = lido
+    .map((_, i) => i)
+    .filter((i) => lido[i] === true);
+
+  if (indices.length === 0) {
+    console.log("Nenhum livro lido ainda.");
+    return;
+  }
+
+  console.log("=== LIVROS LIDOS ===");
+  indices.forEach((i) => {
+    console.log(`- "${titulos[i]}" - ${autores[i]} - ${avaliacoes[i]}/5`);
+  });
+}
+
 function exibirEstatisticas(): void {
   console.log("=== ESTATISTICAS ===");
 
@@ -158,3 +174,50 @@ function exibirPorDecada(): void {
     console.log(`${decada}s: ${titulosDaDecada.join(", ")}`);
   });
 }
+
+// ========== DEMONSTRACAO COMPLETA ==========
+
+console.log("\n");
+console.log("############################################");
+console.log("#   BIBLIOTECA PESSOAL - DEMONSTRACAO     #");
+console.log("############################################");
+
+console.log("\n>>> ESTADO INICIAL\n");
+exibirBiblioteca();
+
+console.log("\n>>> ADICIONANDO LIVROS\n");
+adicionarLivro("Senhor dos Aneis", "J.R.R. Tolkien", 1954, 1200);
+adicionarLivro("O Pequeno Principe", "Antoine de Saint-Exupery", 1943, 96);
+adicionarLivro("Livro Invalido", "Autor Teste", -1, 100);  
+exibirBiblioteca();
+
+console.log("\n>>> REMOVENDO LIVRO (indice 1 - Clean Code)\n");
+removerLivro(1);
+removerLivro(99); 
+exibirBiblioteca();
+
+console.log("\n>>> MARCANDO LIVROS COMO LIDOS\n");
+marcarComoLido(2, 4); 
+marcarComoLido(0, 7); 
+
+console.log("\n>>> BUSCA POR TITULO: 'senhor'\n");
+buscarPorTitulo("senhor");
+
+console.log("\n>>> LIVROS DE J.R.R. Tolkien\n");
+listarPorAutor("J.R.R. Tolkien");
+
+console.log("\n>>> LIVROS LIDOS\n");
+listarLidos();
+
+console.log("\n>>> LIVROS PENDENTES\n");
+listarPendentes();
+
+console.log("\n>>> ESTATISTICAS GERAIS\n");
+exibirEstatisticas();
+
+console.log("\n>>> CLASSIFICACAO POR DECADA\n");
+exibirPorDecada();
+
+console.log("\n############################################");
+console.log("#         FIM DA DEMONSTRACAO              #");
+console.log("############################################\n");
