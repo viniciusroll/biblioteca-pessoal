@@ -145,3 +145,16 @@ function exibirEstatisticas(): void {
   const totalPaginasLidas = indicesLidos.reduce((acc, i) => acc + paginas[i], 0);
   console.log(`Total de paginas lidas: ${totalPaginasLidas}`);
 }
+
+function exibirPorDecada(): void {
+  console.log("=== POR DECADA ===");
+
+  const decadas: number[] = anos.map((ano) => Math.floor(ano / 10) * 10);
+
+  const decadasUnicas: number[] = Array.from(new Set(decadas)).sort();
+
+  decadasUnicas.forEach((decada) => {
+    const titulosDaDecada: string[] = titulos.filter((_, i) => decadas[i] === decada);
+    console.log(`${decada}s: ${titulosDaDecada.join(", ")}`);
+  });
+}
