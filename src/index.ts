@@ -82,3 +82,36 @@ function listarPorAutor(nomeAutor: string): void{
         console.log(`- "${titulos[i]}" (${anos[i]}) - ${paginas[i]} pag`);
     });
 }
+
+function marcarComoLido(indice: number, avaliacao: number): void {
+  if (indice < 0 || indice >= titulos.length) {
+    console.log("Indice invalido");
+    return;
+  }
+
+  if (avaliacao < 1 || avaliacao > 5) {
+    console.log("Avaliacao invalida: deve ser entre 1 e 5");
+    return;
+  }
+
+  lido[indice] = true;
+  avaliacoes[indice] = avaliacao;
+
+  console.log(`Livro "${titulos[indice]}" marcado como lido com nota ${avaliacao}/5`);
+}
+
+function listarPendentes(): void {
+  const indices: number[] = lido
+    .map((_, i) => i)
+    .filter((i) => lido[i] === false);
+
+  if (indices.length === 0) {
+    console.log("Nenhum livro pendente.");
+    return;
+  }
+
+  console.log("=== LIVROS PENDENTES ===");
+  indices.forEach((i) => {
+    console.log(`- "${titulos[i]}" - ${autores[i]} - (${anos[i]})`);
+  });
+}
